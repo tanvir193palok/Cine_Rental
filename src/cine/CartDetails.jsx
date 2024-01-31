@@ -3,6 +3,7 @@ import { MovieContext } from "../context";
 import Delete from "../assets/delete.svg";
 import Checkout from "../assets/icons/checkout.svg";
 import { getImageUrl } from "../utils/cine-utility";
+import { toast } from "react-toastify";
 
 const CartDetails = ({ onClose }) => {
   const { state, dispatch } = useContext(MovieContext);
@@ -13,6 +14,10 @@ const CartDetails = ({ onClose }) => {
     dispatch({
       type: "REMOVE_FROM_CART",
       payload: item,
+    });
+
+    toast.success(`Removed ${item.title} from the Cart !`, {
+      position: "bottom-right",
     });
   };
   return (
@@ -36,7 +41,7 @@ const CartDetails = ({ onClose }) => {
                     />
                     <div>
                       <h3 className="text-base md:text-xl font-bold">
-                        {item.id}
+                        {item.title}
                       </h3>
                       <p className="max-md:text-xs text-[#575A6E]">
                         {item.genre}
